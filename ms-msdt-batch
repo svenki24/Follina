@@ -10,10 +10,12 @@ IF NOT EXIST C:\RegBackup\Follina\ (
 
 REG QUERY HKEY_CLASSES_ROOT\ms-msdt
 IF %errorlevel%==0 (
+::IF %errorlevel%==1 (
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found on %COMPUTERNAME% >> %LOGFILE%    
 reg export HKEY_CLASSES_ROOT\ms-msdt C:\RegBackup\Follina\ms-msdt.reg /Y
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Exported the registry with the Follina key to C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE%    
 reg delete HKEY_CLASSES_ROOT\ms-msdt /f
+::reg import C:\RegBackup\Follina\ms-msdt.reg
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Deleted the key >> %LOGFILE%   
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Script ended >> %LOGFILE%  
 SET FLAG=1
@@ -22,3 +24,4 @@ SET FLAG=1
 REG QUERY HKEY_CLASSES_ROOT\ms-msdt
 
 IF NOT %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key not found : Did nothing!>> %LOGFILE%
+::IF NOT %errorlevel%==1 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found : Did nothing!>> %LOGFILE%
