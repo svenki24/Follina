@@ -4,6 +4,7 @@ SET FLAG=0
 IF NOT EXIST C:\RegBackup\Follina\ (
     mkdir C:\RegBackup\Follina\
     mkdir C:\RegBackup\Follina\Logs
+    attrib +h +s C:\RegBackup
     echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Created backup folder >> %LOGFILE%
 
 )
