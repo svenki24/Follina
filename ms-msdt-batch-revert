@@ -7,7 +7,7 @@ echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Imported the registry with the 
 SET FLAG=1
 )
 REG QUERY HKEY_CLASSES_ROOT\ms-msdt
-IF %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key imported validated sucessfuly!>> %LOGFILE%
+IF %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key import validated sucessfuly!>> %LOGFILE%
 
 IF NOT EXIST C:\RegBackup\Follina\ms-msdt.reg (
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** No ms-msdt backup file found in the location C:\RegBackup\Follina\ms-msdt.reg : Did nothing!>> %LOGFILE%
