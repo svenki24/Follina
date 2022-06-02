@@ -1,25 +1,14 @@
 SET LOGFILE=C:\RegBackup\Follina\Logs\%date:~-4,4%%date:~-7,2%%date:~-10,2%.log
 SET FLAG=0
 
-
-
-IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found : Did nothing!>> %LOGFILE%
-IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found : Did nothing!>> %LOGFILE%
-REG QUERY HKEY_CLASSES_ROOT\ms-msdt
-IF %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found : Did nothing!>> %LOGFILE%
-::IF %errorlevel%==1 (
-echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found on %COMPUTERNAME% >> %LOGFILE%    
-reg export HKEY_CLASSES_ROOT\ms-msdt C:\RegBackup\Follina\ms-msdt.reg /Y
-echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Exported the registry with the Follina key to C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE%    
-reg delete HKEY_CLASSES_ROOT\ms-msdt /f
-::reg import C:\RegBackup\Follina\ms-msdt.reg
-::echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Imported the registry with the Follina key from C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE% 
-echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Deleted the key >> %LOGFILE%   
-echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Script ended >> %LOGFILE%  
+IF EXIST C:\RegBackup\Follina\ms-msdt.reg (
+reg import C:\RegBackup\Follina\ms-msdt.reg
+echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Imported the registry with the Follina key from C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE%
 SET FLAG=1
 )
-
 REG QUERY HKEY_CLASSES_ROOT\ms-msdt
+IF %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key imported validated sucessfuly!>> %LOGFILE%
 
-IF NOT %errorlevel%==0 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key not found : Did nothing!>> %LOGFILE%
-::IF NOT %errorlevel%==1 IF NOT %FLAG%==1 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Follina key found : Did nothing!>> %LOGFILE%
+IF NOT EXIST C:\RegBackup\Follina\ms-msdt.reg (
+echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** No ms-msdt backup file found in the location C:\RegBackup\Follina\ms-msdt.reg : Did nothing!>> %LOGFILE%
+)
