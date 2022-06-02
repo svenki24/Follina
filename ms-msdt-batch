@@ -16,6 +16,7 @@ reg export HKEY_CLASSES_ROOT\ms-msdt C:\RegBackup\Follina\ms-msdt.reg /Y
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Exported the registry with the Follina key to C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE%    
 reg delete HKEY_CLASSES_ROOT\ms-msdt /f
 ::reg import C:\RegBackup\Follina\ms-msdt.reg
+::echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Imported the registry with the Follina key from C:\RegBackup\Follina\ms-msdt.reg >> %LOGFILE% 
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Deleted the key >> %LOGFILE%   
 echo *** Date: %DATE:/=-% ~~ Time:%TIME::=-% *** Script ended >> %LOGFILE%  
 SET FLAG=1
